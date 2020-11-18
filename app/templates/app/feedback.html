@@ -1,0 +1,70 @@
+﻿{% extends "app/layout.html" %}
+{% block content %}
+{% if form != None %}
+<h2>Обратная связь.</h2>
+<div>
+    <form method="post" class="feedback" id="feedback">
+        {% csrf_token %}
+        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}:</label>
+        {{ form.name }}<br>
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label>
+        {{ form.email }}<br>
+        <label for="{{ form.direction.id_for_label }}">{{ form.direction.label }}:</label>
+        {{ form.direction }}<br>
+        <label for="{{ form.topic.id_for_label }}">{{ form.topic.label }}:</label>
+        <div class="select">{{ form.topic }}</div><br>
+        <label for="{{ form.check.id_for_label }}">{{ form.check.label }}?</label>
+        {{ form.check }}<br>
+        <label for="{{ form.info.id_for_label }}">{{ form.info.label }}:</label>
+        {{ form.info }}<br>
+        <div><input type="submit" value="Отправить" id="btn"></div>
+    </form>
+</div>
+{% else %}
+<br>
+<h1>Ваше обращение отправлено!</h1>
+<br>
+<h1 style="font-size: 20px;">Текст обращения:</h1>
+<ul>
+    <li><span>Имя: </span>{{ data.name }}</li>
+    <li><span>E-mail: </span>{{ data.email }}</li>
+    <li><span>Обращение к: </span>{{ data.direction }}</li>
+    <li><span>Тема обращения: </span>{{ data.topic }}</li>
+    <li><span>Наличие аккаунта: </span>{{ data.check }}</li>
+    <li><span>Текст обращения: </span>{{ data.info }}</li>
+</ul>
+{% endif %}
+
+            <script>
+                function focus_input(nam)
+                {
+                    $(nam).css('background-color', 'red');
+                }
+                function blur_input(nam)
+                {
+                    $(nam).css('background-color', 'yellow');
+                }
+                
+
+                $('#id_name').css('background-color', 'yellow');
+                $('#id_name').focus(function() { focus_input('#id_name') });
+                $('#id_name').blur(function () { blur_input('#id_name') });
+
+                $('#id_email').css('background-color', 'yellow');
+                $('#id_email').focus(function() { focus_input('#id_email') });
+                $('#id_email').blur(function() { blur_input('#id_email') });
+
+                
+                $('#id_topic').css('background-color', 'yellow');
+                $('#id_topic').focus(function() { focus_input('#id_topic') });
+                $('#id_topic').blur(function () { blur_input('#id_topic') });
+
+                $('#id_info').css('background-color', 'yellow');
+                $('#id_info').focus(function() { focus_input('#id_info') });
+                $('#id_info').blur(function () { blur_input('#id_info') });
+
+                $('#btn').css({ 'background-color': 'yellow', 'color': '#d1d1d1'});
+                $('#btn').mouseover(function() {  $('#btn').css({ 'background-color': 'red', 'color': '#000000'}); });
+                $('#btn').mouseout(function () { $('#btn').css({ 'background-color': 'yellow', 'color': '#d1d1d1'}); });
+            </script>
+{% endblock %}

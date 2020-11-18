@@ -1,0 +1,39 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h2> {{post_1.title}} </h2> <a href="/" style="float: right; margin-top: -50px;">Назад</a>
+<div class="postMY">
+    <ul>
+        <li><div class="titlePost">Автор: </div><div class="dataPost">{{post_1.author}}</div></li>
+        <li><div class="titlePost">Формат: </div><div class="dataPost">{{post_1.description}}</div></li>
+        <li><div class="titlePost">Описание: </div><div class="dataPost">{{post_1.content|linebreaksbr}}</div></li>
+    </ul>   
+    <div class="postDown"><a href="{{ post_1.file.url }}" class="btn btn-info d-none d-md-inline-block">Сохранить файл {{ post_1.file.name }} на диск ({{ post_1.file.size|filesizeformat }})</a></div>
+</div>
+<hr>
+
+{% if user.is_authenticated %}
+<spavn class="comSpavn">Добавить комментарий:</spavn>
+<form method="POST" class="comForm commform">{% csrf_token %} {# защита от атак CSRF#}
+    <div>
+        {{form.as_p}}
+        <button type="submit" class="save btn btn-success" style="float: right;"> Отправить </button>
+    </div>
+</form>
+{% else %}
+<h3> Для добавления своего комментария, пожалуйста, авторизуйтесь </h3>
+{% endif %}
+{% if comment.count %}
+-----
+{% endif %}
+<hr/>
+{% for comment in comments %}
+<div class="comm">
+    <span class="comName">{{comment.author}}</span>
+    <spavn class="comDate">{{comment.date}}</spavn>
+    <div class="comText"> {{comment.text|linebreaksbr}} </div>
+</div>
+{% endfor %}
+
+{% endblock %}

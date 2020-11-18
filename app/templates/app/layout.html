@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PigeonHost</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+
+</head>
+
+<body>
+{% load staticfiles %}
+    <div class="navbar-new navbar navbar-inverse navbar-fixed-top ">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand"> <img src="{% static 'app/content/images/logo.png' %}" alt="PigeonHost" class="logo"/> </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li><a href="{% url 'about' %}">О нас</a></li>
+                    <li><a href="{% url 'contact' %}">Контакты</a></li>
+                    <li><a href="{% url 'feedback' %}">Обратная связь</a></li>
+                    <li><a href="{% url 'newpost' %}">Добавить файл</a></li>
+                    <li><a href="{% url 'videopost' %}">Видео</a></li>
+                </ul>
+
+                {% include 'app/loginpartial.html' %}
+            </div>
+        </div>
+    </div>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="2000" style="width: 500px; margin: 0 auto 30px auto;">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active darkened">
+                    <img src="{% static 'app/content/1.jpg'%} " alt="Первый слайд" class="img-responsive" />
+                    <div class="carousel-caption" role="option">
+                        <p>
+                            Хостинг-провайдер Managed.com отключил серверы из-за атаки вымогателя
+                            <a class="btn btn-default" href="https://www.anti-malware.ru/news/2020-11-18-114534/34269">
+                                Читать далее
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="item darkened">
+                    <img src="{% static 'app/content/2.jpg'%}" alt="Второй слайд"  class="img-responsive" />
+                    <div class="carousel-caption" role="option">
+                        <p>
+                            Что такое безлимитный хостинг сайтов?
+                            <a class="btn btn-default" href="https://from-ua.com/news/574859-chto-takoe-bezlimitnii-hosting-saitov.html">
+                                Читать далее
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="item darkened">
+                    <img src=" {% static 'app/content/3.jpg'%} " alt="Третий слайд"  class="img-responsive" />
+                    <div class="carousel-caption" role="option">
+                        <p>
+                            Asus представила сервер высокой плотности 2U для шести узлов на процессорах EPYC 7002<br>
+                            <a class="btn btn-default" href="https://www.cnews.ru/news/line/2020-11-17_asus_predstavila_server_vysokoj">
+                                Читать далее
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" style="z-index:2;">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="z-index:2;">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    <div class="container body-content">
+{% block content %}{% endblock %}
+        <hr/>
+        <footer>
+            <div class="social-ico">
+                <a href ="https://facebook.com/PigeonHost" target="_blank"> <img src="{% static 'app/content/images/facebook.png' %}" alt="facebok" title="facebok.com"/></a>
+                <a href ="https://twitter.com/PigeonHost" target="_blank"> <img src="{% static 'app/content/images/twitter.png' %}" alt="twitter" title="twitter.com"/></a>
+                <a href ="https://vk.com/PigeonHost" target="_blank"> <img src="{% static 'app/content/images/vk.png' %}" alt="vk" title="vk.com"/></a>
+            </div>
+            <p>2020 &copy; <a href="/">PigeonHost</a></p>
+        </footer>
+    </div>
+
+    <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'app/scripts/respond.js' %}"></script>
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

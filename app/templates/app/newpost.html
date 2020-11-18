@@ -1,0 +1,13 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<h3>Добавление файла</h3><br>
+<form method="POST" enctype="multipart/form-data" class="formpostnew">{% csrf_token %} {# защита от атак CSRF#}
+    <div>
+        {{ blogform.as_p }}
+        <button type="submit" class="save btn btn-success" style="float: right;"> Отправить </button>
+    </div>
+</form>
+
+
+{% endblock %}

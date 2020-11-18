@@ -1,0 +1,54 @@
+﻿{% extends "app/layout.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="table-name">
+    <div class="table-heading">
+        <h1>Последние файлы</h1>
+    </div>
+    <div class="table-search">
+        <div class="input-search"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4834 9.18645L10.2381 9.53097L10.5371 9.83005L14.3535 13.6465C14.5488 13.8417 14.5488 14.1583 14.3535 14.3535C14.1583 14.5488 13.8417 14.5488 13.6465 14.3535L9.83005 10.5371L9.53097 10.2381L9.18645 10.4834C8.28755 11.1236 7.18845 11.5 6 11.5C2.96243 11.5 0.5 9.03756 0.5 6C0.5 2.96243 2.96243 0.5 6 0.5C9.03756 0.5 11.5 2.96243 11.5 6C11.5 7.18845 11.1236 8.28755 10.4834 9.18645ZM6 1.5C3.51472 1.5 1.5 3.51472 1.5 6C1.5 8.48524 3.51471 10.5 6 10.5C8.48524 10.5 10.5 8.48524 10.5 6C10.5 3.51471 8.48524 1.5 6 1.5Z" fill="#2C2C2C" stroke="#2C2C2C"/></svg></div>
+        <input type="text" placeholder="Введите название"/>
+    </div>
+</div>
+<div class="table-block">
+    <table>
+        <tr><th>Имя</th><th>Тип</th><th>Дата загрузки</th><th></th></tr> 
+        {% for post in posts %}
+        <tr>
+            <td class="td-name">
+                <div>{{post.title}}</div>
+            </td>
+            <td class="td-type">
+                {{post.description}}
+            </td>
+            <td class="td-date">
+                {{post.posted}}
+            </td>
+            <td href="vk.con" style="width: 48px;">
+                <a href="{% url 'blogpost' parametr=post.id %}">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 14C7.10457 14 8 13.1046 8 12C8 10.8954 7.10457 10 6 10C4.89543 10 4 10.8954 4 12C4 13.1046 4.89543 14 6 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM20 12C20 13.1046 19.1046 14 18 14C16.8954 14 16 13.1046 16 12C16 10.8954 16.8954 10 18 10C19.1046 10 20 10.8954 20 12Z" fill="#E0E0E0"/></svg>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</div>
+<div class="table-nav">
+    <div class="table-nav-left">
+        Всего файлов: 
+        <a>{{postCount}}</a>
+    </div>
+    <div class="table-nav-right">
+        {% if posts.has_previous %}
+        <a href="?page={{ posts.previous_page_number }}" class="">«</a>
+         {% endif %}
+        {% if posts.has_previous or posts.has_next %}
+        <a class="table-nav-activ">{{ posts.number }}</a>
+        {% endif %}
+        {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}" style="margin: 0;">»</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
